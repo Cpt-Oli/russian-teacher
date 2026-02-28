@@ -1,0 +1,520 @@
+{
+  "levels": [
+    {
+      "id": "babysteps",
+      "name": "Baby Steps",
+      "description": "Just like a toddler hearing sounds for the first time. We absorb, we don't memorize.",
+      "icon": "🌱"
+    },
+    {
+      "id": "first_words",
+      "name": "First Words",
+      "description": "A toddler pointing at things and naming them. Simple, concrete, real.",
+      "icon": "🗣️"
+    },
+    {
+      "id": "little_sentences",
+      "name": "Little Sentences",
+      "description": "Stringing words together like a kid who just figured out they can ask for stuff.",
+      "icon": "💬"
+    },
+    {
+      "id": "street_talk",
+      "name": "Street Talk",
+      "description": "Real conversations how real Russians actually talk. No textbook nonsense.",
+      "icon": "🔥"
+    },
+    {
+      "id": "storyteller",
+      "name": "Storyteller",
+      "description": "You can tell stories, argue, joke, and navigate life in Russian.",
+      "icon": "📖"
+    }
+  ],
+
+  "solar_systems": [
+    {
+      "level": "babysteps",
+      "order": 1,
+      "sun": {
+        "russian": "Привет",
+        "casual_pronunciation": "pri-VYET",
+        "vibe": "This is the universal 'hey!' — you'd say it to your friend, your neighbor, anyone you're chill with. It's warm, it's casual, it's the first thing every Russian kid learns to say."
+      },
+      "planets": [
+        {
+          "russian": "Здорово",
+          "casual_pronunciation": "zda-RO-va",
+          "vibe": "This is the bro-nod of Russian greetings. Imagine two dudes bumping into each other — 'Yo, what's up?' That energy. Super casual, mostly guys use it."
+        },
+        {
+          "russian": "Здравствуйте",
+          "casual_pronunciation": "ZDRA-stvuy-tye",
+          "vibe": "The formal hello. You'd use it with your boss, a stranger, or someone older. It literally comes from the word for 'health' — so you're basically wishing someone good health just by saying hi. Russians pack meaning into everything."
+        },
+        {
+          "russian": "Как дела?",
+          "casual_pronunciation": "kak di-LA",
+          "vibe": "Literally 'how are affairs/things?' but everyone uses it like 'how's it going?' It's so automatic that people sometimes answer before they even think about it."
+        },
+        {
+          "russian": "Нормально",
+          "casual_pronunciation": "nar-MAL-na",
+          "vibe": "The most Russian answer ever to 'how are you?' It means 'normal/fine' but the real meaning is 'I'm alive, nothing's on fire, let's move on.' Russians don't do the American 'I'm great!' thing."
+        }
+      ],
+      "culture_note": "Russians don't smile at strangers — it's not rude, it's just how it works. A smile is saved for people you actually care about. So when a Russian smiles at you, it actually means something.",
+      "mini_dialogue": {
+        "lines": [
+          {"speaker": "A", "russian": "Привет! Как дела?", "breakdown": "Hey! How's it going?", "natural": "Hey, what's up?"},
+          {"speaker": "B", "russian": "Нормально. Ты как?", "breakdown": "'Normal. You how?' — notice the word order flip, Russian doesn't need 'are'", "natural": "Fine. You?"},
+          {"speaker": "A", "russian": "Тоже нормально.", "breakdown": "'Also normal' — тоже (TO-zhe) means 'also/too', super useful little word", "natural": "Same here."}
+        ]
+      },
+      "grammar_nugget": {
+        "title": "Russian doesn't need 'am/is/are'",
+        "explanation": "In English you say 'I am fine.' Russian just says 'I fine.' — Я нормально. There's no 'am.' The verb 'to be' in present tense? Russians threw it out. They decided it was unnecessary. This makes things simpler once you stop looking for it."
+      }
+    },
+    {
+      "level": "babysteps",
+      "order": 2,
+      "sun": {
+        "russian": "Да / Нет",
+        "casual_pronunciation": "da / nyet",
+        "vibe": "Yes and no. The two most powerful words in any language. 'Да' is 'da' like your dad saying 'duh, obviously.' 'Нет' is a firm 'nyet' — and Russians aren't afraid to use it. No beating around the bush."
+      },
+      "planets": [
+        {
+          "russian": "Ага",
+          "casual_pronunciation": "a-GA",
+          "vibe": "The casual 'yeah/uh-huh.' Way more common than 'да' in real conversation. When your friend asks if you want tea and you go 'mhm' — that's ага energy."
+        },
+        {
+          "russian": "Не-а",
+          "casual_pronunciation": "ne-A",
+          "vibe": "Casual 'nah/nope.' The playful sibling of нет. Less serious, more chill. Like shaking your head with a little smile."
+        },
+        {
+          "russian": "Конечно",
+          "casual_pronunciation": "ka-NYESH-na",
+          "vibe": "Means 'of course' — but the way it's spelled vs how it's said is totally different. Written: конечно. Spoken: канешна. The 'ч' (ch sound) turns silent. Russian loves doing this to mess with learners."
+        },
+        {
+          "russian": "Наверное",
+          "casual_pronunciation": "na-VYER-na-ye",
+          "vibe": "Means 'probably/maybe.' Russians use this ALL the time because they're not big on committing to definitive answers. 'Will you come?' — 'Наверное.' Translation: 'possibly, we'll see, don't hold me to it.'"
+        }
+      ],
+      "culture_note": "Russians are famously direct. If they don't want to do something, they'll say нет without sugar-coating it. This isn't rude in Russian culture — it's actually respectful because they're not wasting your time with fake politeness.",
+      "mini_dialogue": {
+        "lines": [
+          {"speaker": "A", "russian": "Хочешь чай?", "breakdown": "'Want tea?' — хочешь (KHO-chesh) is 'you want' in casual form. No 'do you' needed.", "natural": "Want some tea?"},
+          {"speaker": "B", "russian": "Ага, давай.", "breakdown": "'Yeah, let's do it/give it.' — давай (da-VAY) is one of the most useful Russian words. It means 'let's go/come on/sure.'", "natural": "Yeah, sure."},
+          {"speaker": "A", "russian": "С сахаром?", "breakdown": "'With sugar?' — с (s) means 'with', сахар (SA-khar) is 'sugar', and the -ом ending means it's the 'with' form", "natural": "Sugar?"},
+          {"speaker": "B", "russian": "Не, без.", "breakdown": "'No, without.' — без (byez) is 'without.' Super short, super efficient.", "natural": "Nah, without."}
+        ]
+      },
+      "grammar_nugget": {
+        "title": "Cases: why word endings change",
+        "explanation": "You just saw сахар become сахаром. Russian words change their endings depending on their role in the sentence. 'With sugar' needs the 'instrumental case' — the case for tools and companions. Don't panic about the name. Just notice: when you say 'with [something]', the something gets an -ом or -ой ending. You'll absorb the pattern naturally, like a kid does."
+      }
+    },
+    {
+      "level": "babysteps",
+      "order": 3,
+      "sun": {
+        "russian": "Это",
+        "casual_pronunciation": "EH-ta",
+        "vibe": "This is THE pointing word. Imagine a toddler pointing at everything going 'THIS! THIS!' — that's это. It means 'this/that/it is.' One tiny word, does a ton of work. 'Это кот' = 'This is a cat.' 'Это мама' = 'This is mom.' Simple."
+      },
+      "planets": [
+        {
+          "russian": "Что это?",
+          "casual_pronunciation": "shto EH-ta",
+          "vibe": "What is this? — THE most important question for a learner. Point at stuff and ask. Что (shto) is 'what' — and yes, it's spelled with a ч but pronounced 'sh.' Russian spelling is trolling you again."
+        },
+        {
+          "russian": "Кто это?",
+          "casual_pronunciation": "kto EH-ta",
+          "vibe": "Who is this? — Same pattern but for people. Кто = who. 'Кто это?' while pointing at a photo is how every Russian kid learns family names."
+        },
+        {
+          "russian": "Вот",
+          "casual_pronunciation": "vot",
+          "vibe": "Means 'here it is / there you go / voilà.' When someone hands you something — вот. When you finally find your keys — вот! It's the 'ta-da' word."
+        },
+        {
+          "russian": "Тут / Там",
+          "casual_pronunciation": "toot / tam",
+          "vibe": "Here / there. Тут is 'right here, close to me.' Там is 'over there.' Short, punchy, used constantly. 'Он там' = 'He's over there.'"
+        }
+      ],
+      "culture_note": "Russian doesn't have articles — no 'a' or 'the.' 'Это кот' is both 'this is a cat' and 'this is the cat.' Context tells you which. One less thing to worry about!",
+      "mini_dialogue": {
+        "lines": [
+          {"speaker": "A", "russian": "Что это?", "breakdown": "'What this?' — pointing at something on the table", "natural": "What's that?"},
+          {"speaker": "B", "russian": "Это борщ.", "breakdown": "'This borscht.' — борщ (borshch) is the famous beet soup", "natural": "That's borscht."},
+          {"speaker": "A", "russian": "А это?", "breakdown": "'And this?' — а (a) means 'and/but', used to shift attention", "natural": "And this?"},
+          {"speaker": "B", "russian": "Это хлеб. Вот, попробуй.", "breakdown": "'This bread. Here, try.' — попробуй (pa-PRO-buy) means 'try it', a friendly command form", "natural": "That's bread. Here, try some."}
+        ]
+      },
+      "grammar_nugget": {
+        "title": "No articles, no problem",
+        "explanation": "English has 'a' and 'the' and learners of English struggle with them for years. Russian said 'nah, we don't need those.' There are zero articles in Russian. Кот = a cat, the cat, just cat. Context handles the rest. This is one area where Russian is genuinely simpler than English."
+      }
+    },
+    {
+      "level": "first_words",
+      "order": 1,
+      "sun": {
+        "russian": "Я хочу",
+        "casual_pronunciation": "ya kha-CHOO",
+        "vibe": "I want. This is the toddler power phrase. Once a kid learns 'I want,' they run the household. Я (ya) is 'I', хочу (kha-CHOO) is 'want' in the I-form. Stick anything after it and you're communicating."
+      },
+      "planets": [
+        {
+          "russian": "Я хочу есть",
+          "casual_pronunciation": "ya kha-CHOO yest",
+          "vibe": "I want to eat. Есть (yest) means 'to eat.' When you're hungry, this is survival Russian. Fun fact: есть ALSO means 'there is' in a different context. Russian loves double-duty words."
+        },
+        {
+          "russian": "Я хочу пить",
+          "casual_pronunciation": "ya kha-CHOO peet",
+          "vibe": "I want to drink. Пить (peet) = to drink. Simple, essential. You'll use this one a lot."
+        },
+        {
+          "russian": "Я хочу спать",
+          "casual_pronunciation": "ya kha-CHOO spat",
+          "vibe": "I want to sleep. Спать (spat) = to sleep. The universal human need, perfectly expressed in three syllables."
+        },
+        {
+          "russian": "Мне надо",
+          "casual_pronunciation": "mnye NA-da",
+          "vibe": "I need to / I gotta. This is different from wanting — it's about necessity. Literally 'to-me it-is-necessary.' Russians express need as something that happens TO you, not something you do. Deep, right?"
+        }
+      ],
+      "culture_note": "Notice 'мне надо' — the 'I' isn't even the subject. Russian often frames experiences as things happening TO a person rather than things a person does. 'I'm cold' = 'Мне холодно' (to-me it-is-cold). You're not cold — coldness is happening to you. It's a whole different way of seeing the world.",
+      "mini_dialogue": {
+        "lines": [
+          {"speaker": "A", "russian": "Есть хочешь?", "breakdown": "'Eat you-want?' — notice the verb came first, totally natural in casual Russian", "natural": "You hungry?"},
+          {"speaker": "B", "russian": "Не, пить хочу.", "breakdown": "'No, drink I-want' — flipped word order is fine, emphasis lands on 'drink'", "natural": "Nah, I'm thirsty."},
+          {"speaker": "A", "russian": "Воду? Чай? Что хочешь?", "breakdown": "'Water? Tea? What you-want?' — rapid-fire options, very natural", "natural": "Water? Tea? What do you want?"},
+          {"speaker": "B", "russian": "Давай чай.", "breakdown": "'Let's-do tea.' — давай again, the Swiss Army knife word", "natural": "Tea, yeah."}
+        ]
+      },
+      "grammar_nugget": {
+        "title": "Verb conjugation: it's not as scary as it looks",
+        "explanation": "Хотеть (to want) changes based on who's wanting: я хочу (I want), ты хочешь (you want), он хочет (he wants). The ending shifts. Think of it like English: I want, he wantS — just Russian does it more. The pattern: -у/-ю for 'I', -ешь/-ишь for 'you (casual)', -ет/-ит for 'he/she.' You'll pick this up by hearing it, not by memorizing tables."
+      }
+    },
+    {
+      "level": "first_words",
+      "order": 2,
+      "sun": {
+        "russian": "Мне нравится",
+        "casual_pronunciation": "mnye NRA-vit-sa",
+        "vibe": "I like (something). But here's the twist — in Russian, YOU don't like things. Things are pleasing TO YOU. 'Мне нравится кофе' literally = 'To-me is-pleasing coffee.' Coffee is doing the action, not you. Your mind will resist this at first. Let it happen."
+      },
+      "planets": [
+        {
+          "russian": "Мне не нравится",
+          "casual_pronunciation": "mnye nye NRA-vit-sa",
+          "vibe": "I don't like it. Just shove 'не' (nye) before the verb. Не = not. That's how you negate almost anything in Russian. Beautifully simple."
+        },
+        {
+          "russian": "Мне нравится музыка",
+          "casual_pronunciation": "mnye NRA-vit-sa MOO-zi-ka",
+          "vibe": "I like music. Музыка (MOO-zi-ka) = music. Notice it ends in -а, which tells you it's feminine. In Russian, even music has a gender."
+        },
+        {
+          "russian": "Круто!",
+          "casual_pronunciation": "KROO-ta",
+          "vibe": "Cool! Awesome! — pure slang, used by everyone under 60. When something impresses you, this is your go-to. Literally means 'steep/sharp' but evolved into 'cool.'"
+        },
+        {
+          "russian": "Классно!",
+          "casual_pronunciation": "KLAS-na",
+          "vibe": "Great! Nice! — another 'cool' word. Comes from 'class' (as in classy). Круто and классно are practically interchangeable in casual talk."
+        }
+      ],
+      "culture_note": "The backwards 'liking' structure (things please you, you don't like things) shows up everywhere in Russian. 'I'm bored' = 'мне скучно' (to-me boring). 'I'm funny' — nope, 'мне смешно' (to-me laughable). Russian treats feelings as external forces acting on you. Very philosophical.",
+      "mini_dialogue": {
+        "lines": [
+          {"speaker": "A", "russian": "Тебе нравится эта песня?", "breakdown": "'To-you is-pleasing this song?' — тебе is the 'to you' form of ты", "natural": "You like this song?"},
+          {"speaker": "B", "russian": "Ага, круто! А тебе?", "breakdown": "'Yeah, cool! And to-you?' — bouncing the question back", "natural": "Yeah, it slaps! You?"},
+          {"speaker": "A", "russian": "Мне не очень.", "breakdown": "'To-me not really.' — не очень (nye O-chen) is the polite way to say 'meh, not really'", "natural": "Eh, not really my thing."},
+          {"speaker": "B", "russian": "Ну ладно, каждому своё.", "breakdown": "'Well okay, to-each their-own.' — a common Russian saying", "natural": "Fair enough, to each their own."}
+        ]
+      },
+      "grammar_nugget": {
+        "title": "Gender: everything has it",
+        "explanation": "Every Russian noun is masculine, feminine, or neuter. Usually you can tell by the ending: consonant = masculine (стол, table), -а/-я = feminine (музыка, music), -о/-е = neuter (окно, window). This matters because adjectives and past tense verbs match the gender. Don't memorize rules — just start noticing the patterns. Your brain will do the rest, like a toddler's does."
+      }
+    },
+    {
+      "level": "first_words",
+      "order": 3,
+      "sun": {
+        "russian": "Где?",
+        "casual_pronunciation": "gdye",
+        "vibe": "Where? — Another survival word. 'Где туалет?' (Where's the bathroom?) will save your life. One syllable, maximum utility."
+      },
+      "planets": [
+        {
+          "russian": "Здесь / Тут",
+          "casual_pronunciation": "zdyes / toot",
+          "vibe": "Here. Two words for the same thing — здесь is slightly more proper, тут is more casual. In everyday talk, тут wins."
+        },
+        {
+          "russian": "Там",
+          "casual_pronunciation": "tam",
+          "vibe": "There / over there. You already met this one. Там covers everything from 'across the room' to 'in another city.' Context is king."
+        },
+        {
+          "russian": "Далеко / Близко",
+          "casual_pronunciation": "da-lye-KO / BLEE-ska",
+          "vibe": "Far / close. 'Это далеко?' = 'Is it far?' — essential question when someone gives you directions in Russia and you're about to walk 3 kilometers in the snow."
+        },
+        {
+          "russian": "Направо / Налево / Прямо",
+          "casual_pronunciation": "na-PRA-va / na-LYE-va / PRYA-ma",
+          "vibe": "Right / left / straight. Navigation basics. На- is a prefix meaning 'to/toward.' Право = right side, лево = left side. Прямо = directly/straight."
+        }
+      ],
+      "culture_note": "If you ask for directions in Russia, be prepared for the answer to include landmarks, not street names. 'Go past the big grey building, turn at the kiosk, it's behind the playground.' Russians navigate by vibes, not GPS.",
+      "mini_dialogue": {
+        "lines": [
+          {"speaker": "A", "russian": "Извини, где метро?", "breakdown": "'Sorry, where metro?' — извини (iz-vi-NEE) is casual 'excuse me/sorry'", "natural": "Hey, where's the metro?"},
+          {"speaker": "B", "russian": "Вон там, прямо и налево.", "breakdown": "'Over there, straight and to-left.' — вон (von) = 'over there' with a pointing gesture implied", "natural": "Over there, go straight and turn left."},
+          {"speaker": "A", "russian": "Далеко?", "breakdown": "'Far?' — one word, gets the job done", "natural": "Is it far?"},
+          {"speaker": "B", "russian": "Не, минут пять.", "breakdown": "'No, minutes five.' — number comes AFTER the noun in casual speech sometimes", "natural": "Nah, like five minutes."}
+        ]
+      },
+      "grammar_nugget": {
+        "title": "Dropping pronouns",
+        "explanation": "Notice 'Далеко?' — no 'it', no 'is.' Russian lets you drop pronouns when context makes things obvious. You don't need 'это далеко?' (is this far?) when you're clearly talking about the metro. Less words, more efficiency. Russian respects your intelligence."
+      }
+    },
+    {
+      "level": "little_sentences",
+      "order": 1,
+      "sun": {
+        "russian": "Я думаю, что...",
+        "casual_pronunciation": "ya DOO-ma-yu shto",
+        "vibe": "I think that... — Now you're expressing opinions! Думать (DOO-mat) = to think. Что (shto) = that/what. This structure lets you say almost any opinion: 'Я думаю, что это круто' = 'I think that's cool.'"
+      },
+      "planets": [
+        {
+          "russian": "По-моему",
+          "casual_pronunciation": "pa-MO-ye-moo",
+          "vibe": "In my opinion. Quicker than 'я думаю что.' Slap it at the start of any sentence to make it an opinion. 'По-моему, это вкусно' = 'I think it's tasty.'"
+        },
+        {
+          "russian": "Может быть",
+          "casual_pronunciation": "MO-zhit bit",
+          "vibe": "Maybe / could be. Literally 'can be.' Russians shorten it to 'может' (MO-zhit) in fast speech. The ultimate non-committal phrase."
+        },
+        {
+          "russian": "Не знаю",
+          "casual_pronunciation": "nye ZNA-yu",
+          "vibe": "I don't know. Знать (znat) = to know. You'll hear this A LOT. Russians use it as a filler, a deflection, and sometimes genuinely. Accompanied by a shrug, it's a complete sentence."
+        },
+        {
+          "russian": "Мне кажется",
+          "casual_pronunciation": "mnye KA-zhit-sa",
+          "vibe": "It seems to me. Another backwards construction — the seeming happens TO you. More tentative than 'я думаю.' Good for when you're not sure but want to share a thought."
+        }
+      ],
+      "culture_note": "Russians value directness but also hedge a lot with 'может быть,' 'наверное,' and 'мне кажется.' It's not indecisiveness — it's intellectual honesty. They won't state something as fact unless they're sure.",
+      "mini_dialogue": {
+        "lines": [
+          {"speaker": "A", "russian": "Как тебе этот фильм?", "breakdown": "'How to-you this film?' — как тебе = what do you think of", "natural": "What'd you think of the movie?"},
+          {"speaker": "B", "russian": "По-моему, нормально. Не шедевр, но ок.", "breakdown": "'In-my-opinion, normal. Not masterpiece, but ok.' — шедевр (she-DYEVR) borrowed from French", "natural": "It was alright. Not a masterpiece, but okay."},
+          {"speaker": "A", "russian": "А мне не понравился.", "breakdown": "'But to-me not pleased.' — past tense of нравиться, masculine ending -ся", "natural": "I didn't like it though."},
+          {"speaker": "B", "russian": "Серьёзно? Почему?", "breakdown": "'Seriously? Why?' — серьёзно (syer-YOZ-na) and почему (pa-chi-MOO)", "natural": "Really? How come?"}
+        ]
+      },
+      "grammar_nugget": {
+        "title": "Past tense is shockingly easy",
+        "explanation": "Take any verb, remove -ть from the end, add -л (masculine), -ла (feminine), -ло (neuter), or -ли (plural). That's it. Думать → думал/думала/думали. Хотеть → хотел/хотела/хотели. No 'did,' no 'was doing,' no 'had been doing.' One past tense covers everything. Russian past tense cares about gender, not time complexity. Simpler than English in this regard."
+      }
+    },
+    {
+      "level": "little_sentences",
+      "order": 2,
+      "sun": {
+        "russian": "Можно...?",
+        "casual_pronunciation": "MOZH-na",
+        "vibe": "Can I...? / Is it okay to...? — The magic permission word. 'Можно воды?' = 'Can I have some water?' Можно opens doors — literally and figuratively. It's polite without being stiff."
+      },
+      "planets": [
+        {
+          "russian": "Нельзя",
+          "casual_pronunciation": "nyel-ZYA",
+          "vibe": "You can't / it's not allowed / forbidden. The opposite of можно. If someone says нельзя, the door is closed. 'Тут нельзя курить' = 'You can't smoke here.'"
+        },
+        {
+          "russian": "Давай / Давайте",
+          "casual_pronunciation": "da-VAY / da-VAY-tye",
+          "vibe": "Let's / come on / go ahead. You've seen давай before — it's everywhere. Давайте is the polite/plural version. 'Давай пойдём' = 'Let's go.' 'Давай!' alone = 'Let's do it! / Come on!'"
+        },
+        {
+          "russian": "Пожалуйста",
+          "casual_pronunciation": "pa-ZHAL-sta",
+          "vibe": "Please / you're welcome. Does double duty. 'Можно воды, пожалуйста?' = 'Can I have water, please?' Someone says спасибо (thanks), you reply пожалуйста. In fast speech it gets crunched to 'пжалста.'"
+        },
+        {
+          "russian": "Спасибо / Спс",
+          "casual_pronunciation": "spa-SEE-ba / sps",
+          "vibe": "Thanks. Comes from 'спаси бог' (God save you) — compressed over centuries. In texts, Russians abbreviate it to 'спс' because why type more letters than needed?"
+        }
+      ],
+      "culture_note": "Можно/нельзя is how Russians frame most permissions. Instead of 'may I?' or 'am I allowed?' — it's impersonal. 'Is it possible?' vs 'Is it not possible?' This removes the personal element, making it feel less confrontational.",
+      "mini_dialogue": {
+        "lines": [
+          {"speaker": "A", "russian": "Можно тут сесть?", "breakdown": "'Possible here to-sit?' — сесть (syest) = to sit down", "natural": "Can I sit here?"},
+          {"speaker": "B", "russian": "Да, конечно, садись.", "breakdown": "'Yes, of course, sit-down.' — садись (sa-DEES) is the casual command form", "natural": "Yeah, of course, go ahead."},
+          {"speaker": "A", "russian": "Спасибо!", "breakdown": "Thanks!", "natural": "Thanks!"},
+          {"speaker": "B", "russian": "Пожалуйста. Кофе хочешь?", "breakdown": "'You're welcome. Coffee you-want?'", "natural": "No problem. Want coffee?"}
+        ]
+      },
+      "grammar_nugget": {
+        "title": "Impersonal sentences",
+        "explanation": "Можно, нельзя, надо, холодно, жарко — these are 'impersonal' constructions. There's no subject. It's not 'I can' or 'you must' — it's just 'possible' or 'necessary' floating in space, and context tells you who it applies to. Russian does this a lot. It's like the universe is making the statement, not a person."
+      }
+    },
+    {
+      "level": "street_talk",
+      "order": 1,
+      "sun": {
+        "russian": "Блин!",
+        "casual_pronunciation": "bleen",
+        "vibe": "The PG-rated Russian exclamation. Literally means 'pancake' but it's used like 'dang!/shoot!/crap!' It's the polite substitute for a much stronger word (блять). Everyone uses блин — kids, grandmas, professionals mid-meeting."
+      },
+      "planets": [
+        {
+          "russian": "Ёлки-палки",
+          "casual_pronunciation": "YOL-ki PAL-ki",
+          "vibe": "Literally 'fir trees and sticks' — means something like 'oh for crying out loud!' It's adorably old-fashioned but still used. The family-friendly exclamation."
+        },
+        {
+          "russian": "Фигня",
+          "casual_pronunciation": "fig-NYA",
+          "vibe": "Nonsense / junk / whatever. 'Это фигня' = 'That's nonsense/garbage.' Mildly rude but socially acceptable. Used to dismiss anything unimpressive."
+        },
+        {
+          "russian": "Ничего себе!",
+          "casual_pronunciation": "ni-chi-VO si-BYE",
+          "vibe": "No way! / Wow! Literally 'nothing to oneself' which makes zero sense literally, but it's pure surprise/amazement. Something shocking happens? Ничего себе!"
+        },
+        {
+          "russian": "Ладно",
+          "casual_pronunciation": "LAD-na",
+          "vibe": "Okay / fine / alright. But it's got range. 'Ладно' can mean 'okay fine' (agreeing), 'okay fine!' (annoyed agreement), or 'alright then' (wrapping up a conversation). Tone is everything."
+        }
+      ],
+      "culture_note": "Russian has an incredibly rich world of casual expressions and mild swearing. Блин sits at the top of the acceptable pyramid. Below it are words that every Russian knows but textbooks pretend don't exist. For now, блин will cover 90% of your frustration-expression needs.",
+      "mini_dialogue": {
+        "lines": [
+          {"speaker": "A", "russian": "Блин, я опоздал!", "breakdown": "'Dang, I was-late!' — опоздал (a-paz-DAL) = was late (masculine past)", "natural": "Crap, I'm late!"},
+          {"speaker": "B", "russian": "Ничего себе, на сколько?", "breakdown": "'No way, by how-much?' — на сколько = by how much (time)", "natural": "Whoa, by how much?"},
+          {"speaker": "A", "russian": "На полчаса. Шеф убьёт.", "breakdown": "'By half-hour. Boss will-kill.' — полчаса = half hour, убьёт = will kill (figurative)", "natural": "Half an hour. My boss is gonna kill me."},
+          {"speaker": "B", "russian": "Ладно, скажи что пробки были.", "breakdown": "'Okay, say that traffic-jams were.' — пробки (PROB-ki) = traffic jams", "natural": "Just say there was traffic."}
+        ]
+      },
+      "grammar_nugget": {
+        "title": "Perfective vs Imperfective (the big one)",
+        "explanation": "Russian has two versions of most verbs. Опаздывать (imperfective) = to be in the process of being late, habitually be late. Опоздать (perfective) = to have arrived late, completed action. Think of it as 'doing' vs 'done.' Я опаздываю = 'I'm running late (right now).' Я опоздал = 'I was late (it happened, it's done).' This is THE thing that makes Russian verbs tricky. Don't try to master it — just start noticing the pairs."
+      }
+    },
+    {
+      "level": "street_talk",
+      "order": 2,
+      "sun": {
+        "russian": "Короче",
+        "casual_pronunciation": "ka-RO-che",
+        "vibe": "Basically / long story short / so basically. THE filler word of modern Russian. It means 'shorter' literally, and people use it when they're about to summarize or just... ramble. 'Короче, я пришёл, а там никого.' = 'So basically, I got there, and nobody was there.'"
+      },
+      "planets": [
+        {
+          "russian": "Типа",
+          "casual_pronunciation": "TEE-pa",
+          "vibe": "Like / sort of / kind of. The Russian equivalent of saying 'like' every other word. 'Он типа обиделся' = 'He like, got offended.' Casual speech only."
+        },
+        {
+          "russian": "В смысле?",
+          "casual_pronunciation": "v SMIH-slye",
+          "vibe": "What do you mean? / In what sense? When someone says something confusing, hit them with 'в смысле?' and watch them try to explain. Super common."
+        },
+        {
+          "russian": "Прикинь!",
+          "casual_pronunciation": "pri-KEEN",
+          "vibe": "Can you imagine! / Get this! — used to introduce surprising news or gossip. 'Прикинь, он уволился!' = 'Get this, he quit!' Very colloquial."
+        },
+        {
+          "russian": "Реально?",
+          "casual_pronunciation": "re-AL-na",
+          "vibe": "Really? / For real? — borrowed feel from English but fully Russian. Can be a question ('Really?') or emphasis ('Реально круто!' = 'Genuinely cool!')"
+        }
+      ],
+      "culture_note": "Короче and типа are the verbal tics of modern Russian, especially among younger people. Using them appropriately will make you sound way more natural than perfect textbook Russian ever could.",
+      "mini_dialogue": {
+        "lines": [
+          {"speaker": "A", "russian": "Прикинь, что вчера было!", "breakdown": "'Imagine, what yesterday was!' — вчера (vche-RA) = yesterday", "natural": "Dude, you won't believe what happened yesterday!"},
+          {"speaker": "B", "russian": "Что?", "breakdown": "'What?'", "natural": "What?"},
+          {"speaker": "A", "russian": "Короче, иду я по улице, и типа встречаю Машу.", "breakdown": "'Basically, walk I along street, and like run-into Masha.' — по улице = along the street", "natural": "So basically, I'm walking down the street and I run into Masha."},
+          {"speaker": "B", "russian": "Реально? И что?", "breakdown": "'Really? And what?' — и что is 'and what (happened next)?'", "natural": "No way! And then what?"}
+        ]
+      },
+      "grammar_nugget": {
+        "title": "Word order is flexible (but not random)",
+        "explanation": "'Иду я по улице' — the verb came first, then the subject. In English this would be weird ('Walk I down the street'). In Russian, word order is flexible because case endings tell you who's doing what. The word that comes first gets emphasis. 'Я иду' = neutral. 'Иду я' = emphasizes the walking. Play with word order to control what feels important."
+      }
+    },
+    {
+      "level": "storyteller",
+      "order": 1,
+      "sun": {
+        "russian": "Когда я был маленький...",
+        "casual_pronunciation": "kag-DA ya bil MA-lyen-kiy",
+        "vibe": "When I was little... — Now you're telling stories about the past. Когда = when, был = was (masculine), маленький = little/small. Change был to была if you're female. This opener works for any childhood story."
+      },
+      "planets": [
+        {
+          "russian": "Раньше",
+          "casual_pronunciation": "RAN-she",
+          "vibe": "'Before / back in the day / used to.' Раньше covers everything from 'earlier today' to 'decades ago.' 'Раньше тут был парк' = 'There used to be a park here.' Nostalgia in one word."
+        },
+        {
+          "russian": "Потом",
+          "casual_pronunciation": "pa-TOM",
+          "vibe": "Then / after that. Your story-connecting word. 'Сначала... потом...' = 'First... then...' Every story needs a потом."
+        },
+        {
+          "russian": "Вдруг",
+          "casual_pronunciation": "vdrook",
+          "vibe": "Suddenly. The plot-twist word. 'И вдруг — звонок!' = 'And suddenly — a phone call!' Drama in two syllables."
+        },
+        {
+          "russian": "В итоге",
+          "casual_pronunciation": "v i-TO-gye",
+          "vibe": "In the end / as a result. How you wrap up a story. 'В итоге мы опоздали' = 'In the end we were late.' Also used as 'so the upshot was...'"
+        }
+      ],
+      "culture_note": "Russians are natural storytellers. A simple 'how was your day?' can turn into a 10-minute narrative with characters, plot twists, and a moral conclusion. Learning these narrative connectors (сначала, потом, вдруг, в итоге) is essential for both telling and following Russian stories.",
+      "mini_dialogue": {
+        "lines": [
+          {"speaker": "A", "russian": "Короче, слушай что было.", "breakdown": "'Basically, listen what was.' — слушай (SLOO-shay) = listen, casual command", "natural": "Okay listen, here's what happened."},
+          {"speaker": "B", "russian": "Давай, рассказывай.", "breakdown": "'Go ahead, tell.' — рассказывай (ras-KA-zi-vay) = tell/narrate, imperfective = take your time with it", "natural": "Go on, tell me."},
+          {"speaker": "A", "russian": "Сначала всё было нормально. Потом вдруг позвонил Дима и говорит...", "breakdown": "'At first all was normal. Then suddenly called Dima and says...' — notice 'says' in present tense mid-story, totally natural in Russian storytelling", "natural": "At first everything was fine. Then out of nowhere Dima calls and goes..."},
+          {"speaker": "B", "russian": "Ой, не могу, и что он сказал?", "breakdown": "'Oh, I can't (take it), and what he said?' — не могу here = 'I can't even/the suspense!'", "natural": "Oh my god, what did he say?"}
+        ]
+      },
+      "grammar_nugget": {
+        "title": "Historic present tense in storytelling",
+        "explanation": "Notice 'позвонил Дима и говорит' — 'called Dima and SAYS.' He switches from past to present tense mid-sentence. This is totally normal and actually preferred in casual Russian storytelling. It makes the story feel alive, like it's happening right now. English does this too ('So I'm at the store and this guy WALKS up to me...') but Russian does it even more freely."
+      }
+    }
+  ]
+}

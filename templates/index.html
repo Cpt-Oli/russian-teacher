@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Русский — Learn Russian Naturally</title>
+    <style>
+        :root {
+            --bg: #0f0f13;
+            --surface: #1a1a24;
+            --surface2: #232336;
+            --accent: #7c6ef0;
+            --accent-glow: rgba(124, 110, 240, 0.25);
+            --sun-color: #f0a030;
+            --sun-glow: rgba(240, 160, 48, 0.3);
+            --planet1: #6ec6f0;
+            --planet2: #f06eb0;
+            --planet3: #6ef0a0;
+            --planet4: #f0d06e;
+            --text: #e8e6f0;
+            --text-dim: #8a88a0;
+            --text-bright: #ffffff;
+            --danger: #f06e6e;
+            --radius: 12px;
+            --radius-lg: 20px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Starfield background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background:
+                radial-gradient(1px 1px at 10% 20%, rgba(255,255,255,0.4), transparent),
+                radial-gradient(1px 1px at 30% 70%, rgba(255,255,255,0.3), transparent),
+                radial-gradient(1px 1px at 50% 10%, rgba(255,255,255,0.2), transparent),
+                radial-gradient(1px 1px at 70% 40%, rgba(255,255,255,0.4), transparent),
+                radial-gradient(1px 1px at 90% 80%, rgba(255,255,255,0.3), transparent),
+                radial-gradient(1px 1px at 15% 90%, rgba(255,255,255,0.2), transparent),
+                radial-gradient(1px 1px at 85% 15%, rgba(255,255,255,0.3), transparent),
+                radial-gradient(1px 1px at 45% 55%, rgba(255,255,255,0.15), transparent),
+                radial-gradient(1.5px 1.5px at 25% 45%, rgba(124,110,240,0.5), transparent),
+                radial-gradient(1.5px 1.5px at 75% 65%, rgba(240,160,48,0.4), transparent);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .app { position: relative; z-index: 1; }
+
+        /* Header */
+        header {
+            text-align: center;
+            padding: 40px 20px 20px;
+        }
+        header h1 {
+            font-size: 2.5rem;
+            font-weight: 300;
+            letter-spacing: 6px;
+            color: var(--text-bright);
+            text-transform: uppercase;
+        }
+        header h1 span {
+            color: var(--sun-color);
+            font-weight: 700;
+        }
+        header p {
+            color: var(--text-dim);
+            margin-top: 8px;
+            font-size: 0.95rem;
+            font-style: italic;
+        }
+
+        /* Navigation */
+        .back-btn {
+            display: none;
+            align-items: center;
+            gap: 8px;
+            background: var(--surface);
+            border: 1px solid var(--surface2);
+            color: var(--text);
+            padding: 10px 20px;
+            border-radius: var(--radius);
+            cursor: pointer;
+            font-size: 0.9rem;
+            margin: 0 20px 20px;
+            transition: all 0.2s;
+        }
+        .back-btn:hover { background: var(--surface2); }
+        .back-btn.visible { display: inline-flex; }
+
+        /* Views */
+        .view { display: none; padding: 0 20px 60px; max-width: 900px; margin: 0 auto; }
+        .view.active { display: block; }
+
+        /* Level Select */
+        .level-grid {
+            display: grid;
+            gap: 16px;
+        }
+        .level-card {
+            background: var(--surface);
+            border: 1px solid var(--surface2);
+            border-radius: var(--radius-lg);
+            padding: 28px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .level-card:hover {
+            border-color: var(--accent);
+            box-shadow: 0 0 30px var(--accent-glow);
+            transform: translateY(-2px);
+        }
+        .level-icon {
+            font-size: 2.2rem;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--surface2);
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+        .level-info h3 {
+            font-size: 1.2rem;
+            color: var(--text-bright);
+            margin-bottom: 4px;
+        }
+        .level-info p {
+            color: var(--text-dim);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        /* Lesson List */
+        .lesson-list-header {
+            margin-bottom: 24px;
+        }
+        .lesson-list-header h2 {
+            font-size: 1.6rem;
+            color: var(--text-bright);
+        }
+        .lesson-list-header p {
+            color: var(--text-dim);
+            margin-top: 4px;
+        }
+        .lesson-item {
+            background: var(--surface);
+            border: 1px solid var(--surface2);
+            border-radius: var(--radius);
+            padding: 20px 24px;
+            margin-bottom: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .lesson-item:hover {
+            border-color: var(--sun-color);
+            box-shadow: 0 0 20px var(--sun-glow);
+        }
+        .lesson-item .sun-word {
+            font-size: 1.3rem;
+            color: var(--sun-color);
+            font-weight: 600;
+        }
+        .lesson-item .sun-pron {
+            color: var(--text-dim);
+            font-size: 0.85rem;
+            margin-top: 2px;
+        }
+        .lesson-item .arrow {
+            color: var(--text-dim);
+            font-size: 1.2rem;
+        }
+
+        /* Lesson View */
+        .lesson-content {
+            animation: fadeIn 0.4s ease;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Solar System Visualization */
+        .solar-system-visual {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            aspect-ratio: 1;
+            margin: 0 auto 40px;
+        }
+        .orbit {
+            position: absolute;
+            border: 1px dashed rgba(255,255,255,0.08);
+            border-radius: 50%;
+        }
+        .orbit-1 { width: 60%; height: 60%; top: 20%; left: 20%; }
+        .orbit-2 { width: 80%; height: 80%; top: 10%; left: 10%; }
+        .orbit-3 { width: 100%; height: 100%; top: 0; left: 0; }
+
+        .sun-center {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 120px; height: 120px;
+            background: radial-gradient(circle, var(--sun-color), #d08020);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            box-shadow: 0 0 60px var(--sun-glow), 0 0 120px rgba(240, 160, 48, 0.15);
+            cursor: pointer;
+            transition: all 0.3s;
+            z-index: 2;
+        }
+        .sun-center:hover {
+            box-shadow: 0 0 80px var(--sun-glow), 0 0 160px rgba(240, 160, 48, 0.25);
+            transform: translate(-50%, -50%) scale(1.05);
+        }
+        .sun-center .label {
+            color: #fff;
+            font-weight: 700;
+            font-size: 1rem;
+            text-align: center;
+            line-height: 1.2;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+        }
+
+        .planet {
+            position: absolute;
+            width: 70px; height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            z-index: 2;
+        }
+        .planet:hover {
+            transform: scale(1.15);
+        }
+        .planet .label {
+            color: #fff;
+            font-weight: 600;
+            font-size: 0.7rem;
+            text-align: center;
+            line-height: 1.2;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+        }
+        .planet-0 {
+            background: radial-gradient(circle, var(--planet1), #3a8ab0);
+            box-shadow: 0 0 25px rgba(110, 198, 240, 0.3);
+            top: 8%; left: 50%; transform: translateX(-50%);
+        }
+        .planet-0:hover { box-shadow: 0 0 40px rgba(110, 198, 240, 0.5); }
+        .planet-1 {
+            background: radial-gradient(circle, var(--planet2), #b03a70);
+            box-shadow: 0 0 25px rgba(240, 110, 176, 0.3);
+            top: 50%; right: 2%; transform: translateY(-50%);
+        }
+        .planet-1:hover { box-shadow: 0 0 40px rgba(240, 110, 176, 0.5); }
+        .planet-2 {
+            background: radial-gradient(circle, var(--planet3), #3ab070);
+            box-shadow: 0 0 25px rgba(110, 240, 160, 0.3);
+            bottom: 8%; left: 50%; transform: translateX(-50%);
+        }
+        .planet-2:hover { box-shadow: 0 0 40px rgba(110, 240, 160, 0.5); }
+        .planet-3 {
+            background: radial-gradient(circle, var(--planet4), #b0a03a);
+            box-shadow: 0 0 25px rgba(240, 208, 110, 0.3);
+            top: 50%; left: 2%; transform: translateY(-50%);
+        }
+        .planet-3:hover { box-shadow: 0 0 40px rgba(240, 208, 110, 0.5); }
+
+        /* Detail Panel */
+        .detail-panel {
+            background: var(--surface);
+            border: 1px solid var(--surface2);
+            border-radius: var(--radius-lg);
+            padding: 28px;
+            margin-bottom: 24px;
+            animation: fadeIn 0.3s ease;
+        }
+        .detail-panel.sun-detail { border-color: var(--sun-color); }
+        .detail-panel.planet-detail-0 { border-color: var(--planet1); }
+        .detail-panel.planet-detail-1 { border-color: var(--planet2); }
+        .detail-panel.planet-detail-2 { border-color: var(--planet3); }
+        .detail-panel.planet-detail-3 { border-color: var(--planet4); }
+
+        .detail-russian {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+        .detail-russian.sun-text { color: var(--sun-color); }
+        .detail-russian.planet-text-0 { color: var(--planet1); }
+        .detail-russian.planet-text-1 { color: var(--planet2); }
+        .detail-russian.planet-text-2 { color: var(--planet3); }
+        .detail-russian.planet-text-3 { color: var(--planet4); }
+
+        .detail-pronunciation {
+            color: var(--text-dim);
+            font-size: 1rem;
+            font-style: italic;
+            margin-bottom: 16px;
+        }
+        .detail-vibe {
+            color: var(--text);
+            line-height: 1.7;
+            font-size: 1rem;
+        }
+
+        /* Section Cards */
+        .section-card {
+            background: var(--surface);
+            border: 1px solid var(--surface2);
+            border-radius: var(--radius-lg);
+            padding: 28px;
+            margin-bottom: 20px;
+        }
+        .section-title {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--accent);
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+
+        /* Dialogue */
+        .dialogue-line {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 16px;
+            padding: 14px;
+            border-radius: var(--radius);
+            background: var(--surface2);
+            flex-direction: column;
+        }
+        .dialogue-speaker {
+            font-weight: 700;
+            color: var(--accent);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .dialogue-russian {
+            font-size: 1.2rem;
+            color: var(--text-bright);
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .dialogue-russian:hover {
+            color: var(--sun-color);
+        }
+        .dialogue-breakdown {
+            color: var(--text-dim);
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin-top: 4px;
+            display: none;
+        }
+        .dialogue-breakdown.visible {
+            display: block;
+        }
+        .dialogue-natural {
+            color: var(--planet3);
+            font-size: 0.85rem;
+            font-style: italic;
+            display: none;
+        }
+        .dialogue-natural.visible {
+            display: block;
+        }
+        .dialogue-hint {
+            text-align: center;
+            color: var(--text-dim);
+            font-size: 0.8rem;
+            margin-top: -8px;
+            margin-bottom: 16px;
+            font-style: italic;
+        }
+
+        /* Grammar Nugget */
+        .grammar-title {
+            font-size: 1.1rem;
+            color: var(--sun-color);
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+        .grammar-text {
+            color: var(--text);
+            line-height: 1.8;
+            font-size: 0.95rem;
+        }
+
+        /* Culture Note */
+        .culture-text {
+            color: var(--text);
+            line-height: 1.8;
+            font-size: 0.95rem;
+        }
+
+        /* Explore prompt */
+        .explore-prompt {
+            text-align: center;
+            color: var(--text-dim);
+            font-size: 0.9rem;
+            margin-bottom: 30px;
+            padding: 12px;
+            background: var(--surface);
+            border-radius: var(--radius);
+            border: 1px dashed var(--surface2);
+        }
+
+        /* Methodology Banner */
+        .method-banner {
+            background: linear-gradient(135deg, var(--surface), var(--surface2));
+            border: 1px solid var(--surface2);
+            border-radius: var(--radius-lg);
+            padding: 24px;
+            margin: 0 20px 30px;
+            max-width: 860px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .method-pills {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .method-pill {
+            background: var(--surface);
+            border: 1px solid var(--accent);
+            border-radius: 20px;
+            padding: 6px 14px;
+            font-size: 0.78rem;
+            color: var(--accent);
+            letter-spacing: 0.5px;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            header h1 { font-size: 1.6rem; letter-spacing: 3px; }
+            .solar-system-visual { max-width: 320px; }
+            .sun-center { width: 90px; height: 90px; }
+            .sun-center .label { font-size: 0.8rem; }
+            .planet { width: 55px; height: 55px; }
+            .planet .label { font-size: 0.6rem; }
+            .detail-russian { font-size: 1.5rem; }
+        }
+
+        /* Scroll hint animation */
+        @keyframes pulse { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
+        .scroll-hint { animation: pulse 2s infinite; }
+    </style>
+</head>
+<body>
+    <div class="app">
+        <header>
+            <h1>Р<span>у</span>сский</h1>
+            <p>Learn Russian the way your brain actually wants to</p>
+        </header>
+
+        <div class="method-banner">
+            <div class="method-pills">
+                <span class="method-pill">ALG — Automatic Language Growth</span>
+                <span class="method-pill">Solar System Theory</span>
+                <span class="method-pill">Toddler → Fluent Progression</span>
+                <span class="method-pill">No Direct Translations</span>
+                <span class="method-pill">Casual &amp; Natural</span>
+            </div>
+        </div>
+
+        <button class="back-btn" id="backBtn" onclick="goBack()">
+            ← Back
+        </button>
+
+        <!-- Level Selection -->
+        <div class="view active" id="levelView">
+            <div class="level-grid" id="levelGrid"></div>
+        </div>
+
+        <!-- Lesson List -->
+        <div class="view" id="lessonListView">
+            <div class="lesson-list-header" id="lessonListHeader"></div>
+            <div id="lessonList"></div>
+        </div>
+
+        <!-- Lesson Detail -->
+        <div class="view" id="lessonView">
+            <div class="lesson-content" id="lessonContent"></div>
+        </div>
+    </div>
+
+    <script>
+        let currentLevel = null;
+        let navStack = ['levelView'];
+
+        // ---- Navigation ----
+        function showView(viewId) {
+            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+            document.getElementById(viewId).classList.add('active');
+            document.getElementById('backBtn').classList.toggle('visible', viewId !== 'levelView');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function goBack() {
+            if (navStack.length > 1) {
+                navStack.pop();
+                showView(navStack[navStack.length - 1]);
+            }
+        }
+
+        function navigateTo(viewId) {
+            navStack.push(viewId);
+            showView(viewId);
+        }
+
+        // ---- Load Levels ----
+        async function loadLevels() {
+            const res = await fetch('/api/levels');
+            const levels = await res.json();
+            const grid = document.getElementById('levelGrid');
+            grid.innerHTML = levels.map(l => `
+                <div class="level-card" onclick="openLevel('${l.id}', '${l.name}', '${l.description}')">
+                    <div class="level-icon">${l.icon}</div>
+                    <div class="level-info">
+                        <h3>${l.name}</h3>
+                        <p>${l.description}</p>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // ---- Open Level ----
+        async function openLevel(levelId, name, description) {
+            currentLevel = levelId;
+            const res = await fetch(`/api/lessons/${levelId}`);
+            const lessons = await res.json();
+
+            document.getElementById('lessonListHeader').innerHTML = `
+                <h2>${name}</h2>
+                <p>${description}</p>
+            `;
+
+            const list = document.getElementById('lessonList');
+            if (lessons.length === 0) {
+                list.innerHTML = `<div class="section-card"><p style="color:var(--text-dim)">More lessons coming soon! Keep practicing what you've learned.</p></div>`;
+            } else {
+                list.innerHTML = lessons.map(l => `
+                    <div class="lesson-item" onclick="openLesson('${levelId}', ${l.order})">
+                        <div>
+                            <div class="sun-word">${l.sun.russian}</div>
+                            <div class="sun-pron">${l.sun.casual_pronunciation}</div>
+                        </div>
+                        <div class="arrow">→</div>
+                    </div>
+                `).join('');
+            }
+
+            navigateTo('lessonListView');
+        }
+
+        // ---- Open Lesson ----
+        async function openLesson(levelId, order) {
+            const res = await fetch(`/api/lesson/${levelId}/${order}`);
+            const lesson = await res.json();
+            renderLesson(lesson);
+            navigateTo('lessonView');
+        }
+
+        // ---- Render Lesson ----
+        function renderLesson(lesson) {
+            const c = document.getElementById('lessonContent');
+            const planets = lesson.planets;
+
+            // Truncate labels for solar system visual
+            function shortLabel(text) {
+                return text.length > 12 ? text.substring(0, 10) + '…' : text;
+            }
+
+            c.innerHTML = `
+                <!-- Solar System Visual -->
+                <div class="solar-system-visual">
+                    <div class="orbit orbit-1"></div>
+                    <div class="orbit orbit-2"></div>
+                    <div class="orbit orbit-3"></div>
+                    <div class="sun-center" onclick="showDetail('sun')">
+                        <span class="label">${shortLabel(lesson.sun.russian)}</span>
+                    </div>
+                    ${planets.map((p, i) => `
+                        <div class="planet planet-${i}" onclick="showDetail('planet', ${i})">
+                            <span class="label">${shortLabel(p.russian)}</span>
+                        </div>
+                    `).join('')}
+                </div>
+
+                <div class="explore-prompt scroll-hint">
+                    ☝ Click the sun or any planet to explore its meaning
+                </div>
+
+                <!-- Detail Panel (hidden until click) -->
+                <div id="detailPanel" style="display:none;"></div>
+
+                <!-- Mini Dialogue -->
+                <div class="section-card">
+                    <div class="section-title">Mini Conversation</div>
+                    <div class="dialogue-hint">Click any Russian text to reveal the breakdown</div>
+                    ${lesson.mini_dialogue.lines.map((line, i) => `
+                        <div class="dialogue-line">
+                            <div class="dialogue-speaker">Person ${line.speaker}</div>
+                            <div class="dialogue-russian" onclick="toggleBreakdown(${i})">
+                                ${line.russian}
+                            </div>
+                            <div class="dialogue-breakdown" id="breakdown-${i}">
+                                ${line.breakdown}
+                            </div>
+                            <div class="dialogue-natural" id="natural-${i}">
+                                ≈ "${line.natural}"
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+
+                <!-- Grammar Nugget -->
+                <div class="section-card">
+                    <div class="section-title">Grammar Nugget</div>
+                    <div class="grammar-title">${lesson.grammar_nugget.title}</div>
+                    <div class="grammar-text">${lesson.grammar_nugget.explanation}</div>
+                </div>
+
+                <!-- Culture Note -->
+                <div class="section-card">
+                    <div class="section-title">Culture Note</div>
+                    <div class="culture-text">${lesson.culture_note}</div>
+                </div>
+            `;
+
+            // Store lesson data for detail panel access
+            window._currentLesson = lesson;
+        }
+
+        // ---- Show Detail Panel ----
+        function showDetail(type, index) {
+            const lesson = window._currentLesson;
+            const panel = document.getElementById('detailPanel');
+            let data, colorClass, textClass;
+
+            if (type === 'sun') {
+                data = lesson.sun;
+                colorClass = 'sun-detail';
+                textClass = 'sun-text';
+            } else {
+                data = lesson.planets[index];
+                colorClass = `planet-detail-${index}`;
+                textClass = `planet-text-${index}`;
+            }
+
+            panel.style.display = 'block';
+            panel.className = `detail-panel ${colorClass}`;
+            panel.innerHTML = `
+                <div class="detail-russian ${textClass}">${data.russian}</div>
+                <div class="detail-pronunciation">${data.casual_pronunciation}</div>
+                <div class="detail-vibe">${data.vibe}</div>
+            `;
+
+            panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        // ---- Toggle Dialogue Breakdown ----
+        function toggleBreakdown(index) {
+            const bd = document.getElementById(`breakdown-${index}`);
+            const nat = document.getElementById(`natural-${index}`);
+            bd.classList.toggle('visible');
+            nat.classList.toggle('visible');
+        }
+
+        // ---- Init ----
+        loadLevels();
+    </script>
+</body>
+</html>
