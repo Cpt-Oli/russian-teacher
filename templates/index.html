@@ -3,699 +3,915 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Русский — Learn Russian Naturally</title>
+    <title>Learn Russian</title>
     <style>
-        :root {
-            --bg: #0f0f13;
-            --surface: #1a1a24;
-            --surface2: #232336;
-            --accent: #7c6ef0;
-            --accent-glow: rgba(124, 110, 240, 0.25);
-            --sun-color: #f0a030;
-            --sun-glow: rgba(240, 160, 48, 0.3);
-            --planet1: #6ec6f0;
-            --planet2: #f06eb0;
-            --planet3: #6ef0a0;
-            --planet4: #f0d06e;
-            --text: #e8e6f0;
-            --text-dim: #8a88a0;
-            --text-bright: #ffffff;
-            --danger: #f06e6e;
-            --radius: 12px;
-            --radius-lg: 20px;
-        }
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --bg: #f0f2f5;
+            --surface: #ffffff;
+            --primary: #4f46e5;
+            --primary-light: #eef2ff;
+            --primary-dark: #3730a3;
+            --accent: #ea580c;
+            --accent-light: #fff7ed;
+            --text: #111827;
+            --text-secondary: #6b7280;
+            --text-light: #9ca3af;
+            --border: #e5e7eb;
+            --border-light: #f3f4f6;
+            --success: #059669;
+            --success-light: #ecfdf5;
+            --radius: 12px;
+            --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.05), 0 2px 4px rgba(0,0,0,0.04);
+        }
 
         body {
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
             background: var(--bg);
             color: var(--text);
-            min-height: 100vh;
-            overflow-x: hidden;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
         }
 
-        /* Starfield background */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background:
-                radial-gradient(1px 1px at 10% 20%, rgba(255,255,255,0.4), transparent),
-                radial-gradient(1px 1px at 30% 70%, rgba(255,255,255,0.3), transparent),
-                radial-gradient(1px 1px at 50% 10%, rgba(255,255,255,0.2), transparent),
-                radial-gradient(1px 1px at 70% 40%, rgba(255,255,255,0.4), transparent),
-                radial-gradient(1px 1px at 90% 80%, rgba(255,255,255,0.3), transparent),
-                radial-gradient(1px 1px at 15% 90%, rgba(255,255,255,0.2), transparent),
-                radial-gradient(1px 1px at 85% 15%, rgba(255,255,255,0.3), transparent),
-                radial-gradient(1px 1px at 45% 55%, rgba(255,255,255,0.15), transparent),
-                radial-gradient(1.5px 1.5px at 25% 45%, rgba(124,110,240,0.5), transparent),
-                radial-gradient(1.5px 1.5px at 75% 65%, rgba(240,160,48,0.4), transparent);
-            pointer-events: none;
-            z-index: 0;
+        .container {
+            max-width: 660px;
+            margin: 0 auto;
+            padding: 0 16px;
         }
-
-        .app { position: relative; z-index: 1; }
-
-        /* Header */
-        header {
-            text-align: center;
-            padding: 40px 20px 20px;
-        }
-        header h1 {
-            font-size: 2.5rem;
-            font-weight: 300;
-            letter-spacing: 6px;
-            color: var(--text-bright);
-            text-transform: uppercase;
-        }
-        header h1 span {
-            color: var(--sun-color);
-            font-weight: 700;
-        }
-        header p {
-            color: var(--text-dim);
-            margin-top: 8px;
-            font-size: 0.95rem;
-            font-style: italic;
-        }
-
-        /* Navigation */
-        .back-btn {
-            display: none;
-            align-items: center;
-            gap: 8px;
-            background: var(--surface);
-            border: 1px solid var(--surface2);
-            color: var(--text);
-            padding: 10px 20px;
-            border-radius: var(--radius);
-            cursor: pointer;
-            font-size: 0.9rem;
-            margin: 0 20px 20px;
-            transition: all 0.2s;
-        }
-        .back-btn:hover { background: var(--surface2); }
-        .back-btn.visible { display: inline-flex; }
 
         /* Views */
-        .view { display: none; padding: 0 20px 60px; max-width: 900px; margin: 0 auto; }
-        .view.active { display: block; }
+        .view { display: none; }
+        .view.active { display: block; animation: fadeIn 0.3s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Level Select */
-        .level-grid {
-            display: grid;
-            gap: 16px;
-        }
-        .level-card {
-            background: var(--surface);
-            border: 1px solid var(--surface2);
-            border-radius: var(--radius-lg);
-            padding: 28px;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-        .level-card:hover {
-            border-color: var(--accent);
-            box-shadow: 0 0 30px var(--accent-glow);
-            transform: translateY(-2px);
-        }
-        .level-icon {
-            font-size: 2.2rem;
-            width: 60px;
-            height: 60px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: var(--surface2);
-            border-radius: 50%;
-            flex-shrink: 0;
-        }
-        .level-info h3 {
-            font-size: 1.2rem;
-            color: var(--text-bright);
-            margin-bottom: 4px;
-        }
-        .level-info p {
-            color: var(--text-dim);
-            font-size: 0.9rem;
-            line-height: 1.5;
-        }
-
-        /* Lesson List */
-        .lesson-list-header {
-            margin-bottom: 24px;
-        }
-        .lesson-list-header h2 {
-            font-size: 1.6rem;
-            color: var(--text-bright);
-        }
-        .lesson-list-header p {
-            color: var(--text-dim);
-            margin-top: 4px;
-        }
-        .lesson-item {
-            background: var(--surface);
-            border: 1px solid var(--surface2);
-            border-radius: var(--radius);
-            padding: 20px 24px;
-            margin-bottom: 12px;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .lesson-item:hover {
-            border-color: var(--sun-color);
-            box-shadow: 0 0 20px var(--sun-glow);
-        }
-        .lesson-item .sun-word {
-            font-size: 1.3rem;
-            color: var(--sun-color);
-            font-weight: 600;
-        }
-        .lesson-item .sun-pron {
-            color: var(--text-dim);
-            font-size: 0.85rem;
-            margin-top: 2px;
-        }
-        .lesson-item .arrow {
-            color: var(--text-dim);
-            font-size: 1.2rem;
-        }
-
-        /* Lesson View */
-        .lesson-content {
-            animation: fadeIn 0.4s ease;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Solar System Visualization */
-        .solar-system-visual {
-            position: relative;
-            width: 100%;
-            max-width: 500px;
-            aspect-ratio: 1;
-            margin: 0 auto 40px;
-        }
-        .orbit {
-            position: absolute;
-            border: 1px dashed rgba(255,255,255,0.08);
-            border-radius: 50%;
-        }
-        .orbit-1 { width: 60%; height: 60%; top: 20%; left: 20%; }
-        .orbit-2 { width: 80%; height: 80%; top: 10%; left: 10%; }
-        .orbit-3 { width: 100%; height: 100%; top: 0; left: 0; }
-
-        .sun-center {
-            position: absolute;
-            top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            width: 120px; height: 120px;
-            background: radial-gradient(circle, var(--sun-color), #d08020);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            box-shadow: 0 0 60px var(--sun-glow), 0 0 120px rgba(240, 160, 48, 0.15);
-            cursor: pointer;
-            transition: all 0.3s;
-            z-index: 2;
-        }
-        .sun-center:hover {
-            box-shadow: 0 0 80px var(--sun-glow), 0 0 160px rgba(240, 160, 48, 0.25);
-            transform: translate(-50%, -50%) scale(1.05);
-        }
-        .sun-center .label {
-            color: #fff;
-            font-weight: 700;
-            font-size: 1rem;
+        /* Home Header */
+        .home-header {
             text-align: center;
-            line-height: 1.2;
-            text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+            padding: 48px 0 32px;
         }
-
-        .planet {
-            position: absolute;
-            width: 70px; height: 70px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s;
-            z-index: 2;
-        }
-        .planet:hover {
-            transform: scale(1.15);
-        }
-        .planet .label {
-            color: #fff;
-            font-weight: 600;
-            font-size: 0.7rem;
-            text-align: center;
-            line-height: 1.2;
-            text-shadow: 0 1px 3px rgba(0,0,0,0.5);
-        }
-        .planet-0 {
-            background: radial-gradient(circle, var(--planet1), #3a8ab0);
-            box-shadow: 0 0 25px rgba(110, 198, 240, 0.3);
-            top: 8%; left: 50%; transform: translateX(-50%);
-        }
-        .planet-0:hover { box-shadow: 0 0 40px rgba(110, 198, 240, 0.5); }
-        .planet-1 {
-            background: radial-gradient(circle, var(--planet2), #b03a70);
-            box-shadow: 0 0 25px rgba(240, 110, 176, 0.3);
-            top: 50%; right: 2%; transform: translateY(-50%);
-        }
-        .planet-1:hover { box-shadow: 0 0 40px rgba(240, 110, 176, 0.5); }
-        .planet-2 {
-            background: radial-gradient(circle, var(--planet3), #3ab070);
-            box-shadow: 0 0 25px rgba(110, 240, 160, 0.3);
-            bottom: 8%; left: 50%; transform: translateX(-50%);
-        }
-        .planet-2:hover { box-shadow: 0 0 40px rgba(110, 240, 160, 0.5); }
-        .planet-3 {
-            background: radial-gradient(circle, var(--planet4), #b0a03a);
-            box-shadow: 0 0 25px rgba(240, 208, 110, 0.3);
-            top: 50%; left: 2%; transform: translateY(-50%);
-        }
-        .planet-3:hover { box-shadow: 0 0 40px rgba(240, 208, 110, 0.5); }
-
-        /* Detail Panel */
-        .detail-panel {
-            background: var(--surface);
-            border: 1px solid var(--surface2);
-            border-radius: var(--radius-lg);
-            padding: 28px;
-            margin-bottom: 24px;
-            animation: fadeIn 0.3s ease;
-        }
-        .detail-panel.sun-detail { border-color: var(--sun-color); }
-        .detail-panel.planet-detail-0 { border-color: var(--planet1); }
-        .detail-panel.planet-detail-1 { border-color: var(--planet2); }
-        .detail-panel.planet-detail-2 { border-color: var(--planet3); }
-        .detail-panel.planet-detail-3 { border-color: var(--planet4); }
-
-        .detail-russian {
+        .home-header h1 {
             font-size: 2rem;
             font-weight: 700;
-            margin-bottom: 4px;
+            color: var(--text);
+            margin-bottom: 6px;
         }
-        .detail-russian.sun-text { color: var(--sun-color); }
-        .detail-russian.planet-text-0 { color: var(--planet1); }
-        .detail-russian.planet-text-1 { color: var(--planet2); }
-        .detail-russian.planet-text-2 { color: var(--planet3); }
-        .detail-russian.planet-text-3 { color: var(--planet4); }
+        .home-header p {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+        }
 
-        .detail-pronunciation {
-            color: var(--text-dim);
-            font-size: 1rem;
+        /* Level Section */
+        .level-section {
+            margin-bottom: 28px;
+        }
+        .level-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 20px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: var(--shadow);
+        }
+        .level-header:hover {
+            border-color: var(--primary);
+            box-shadow: var(--shadow-md);
+        }
+        .level-header.open {
+            border-radius: var(--radius) var(--radius) 0 0;
+            border-color: var(--primary);
+            background: var(--primary-light);
+        }
+        .level-icon { font-size: 1.5rem; }
+        .level-title { font-weight: 600; font-size: 1.1rem; flex: 1; }
+        .level-desc { font-size: 0.85rem; color: var(--text-secondary); }
+        .level-chevron {
+            transition: transform 0.2s;
+            color: var(--text-light);
+            font-size: 1.2rem;
+        }
+        .level-header.open .level-chevron { transform: rotate(90deg); }
+
+        .level-lessons {
+            display: none;
+            border: 1px solid var(--primary);
+            border-top: 0;
+            border-radius: 0 0 var(--radius) var(--radius);
+            background: var(--surface);
+            overflow: hidden;
+        }
+        .level-lessons.open { display: block; }
+
+        .lesson-card {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 16px 20px;
+            cursor: pointer;
+            border-bottom: 1px solid var(--border-light);
+            transition: background 0.15s;
+        }
+        .lesson-card:last-child { border-bottom: 0; }
+        .lesson-card:hover { background: var(--primary-light); }
+        .lesson-num {
+            width: 32px; height: 32px;
+            display: flex; align-items: center; justify-content: center;
+            background: var(--primary-light);
+            color: var(--primary);
+            border-radius: 50%;
+            font-weight: 700;
+            font-size: 0.85rem;
+            flex-shrink: 0;
+        }
+        .lesson-card-info { flex: 1; }
+        .lesson-card-title { font-weight: 600; font-size: 0.95rem; }
+        .lesson-card-sub { font-size: 0.85rem; color: var(--text-secondary); margin-top: 2px; }
+        .lesson-card-arrow { color: var(--text-light); font-size: 1.1rem; }
+
+        /* Lesson View */
+        .lesson-top-bar {
+            position: sticky;
+            top: 0;
+            background: var(--surface);
+            border-bottom: 1px solid var(--border);
+            padding: 12px 0;
+            z-index: 100;
+            box-shadow: var(--shadow);
+        }
+        .lesson-top-inner {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            max-width: 660px;
+            margin: 0 auto;
+            padding: 0 16px;
+        }
+        .back-btn {
+            background: none;
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            padding: 6px 14px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: all 0.15s;
+            white-space: nowrap;
+        }
+        .back-btn:hover { background: var(--bg); color: var(--text); }
+        .lesson-top-title {
+            font-weight: 600;
+            font-size: 0.95rem;
+            flex: 1;
+            text-align: center;
+            color: var(--text-secondary);
+        }
+        .lesson-top-right { width: 80px; }
+
+        /* Lesson Content */
+        .lesson-body { padding: 24px 0 60px; }
+
+        /* Hero Card */
+        .hero-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 32px 28px;
+            text-align: center;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow);
+        }
+        .hero-russian {
+            font-size: 2.4rem;
+            font-weight: 700;
+            color: var(--primary-dark);
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .hero-pron {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
             font-style: italic;
             margin-bottom: 16px;
         }
-        .detail-vibe {
+        .hero-vibe {
+            font-size: 1rem;
             color: var(--text);
             line-height: 1.7;
-            font-size: 1rem;
+            max-width: 520px;
+            margin: 0 auto;
         }
 
         /* Section Cards */
-        .section-card {
+        .section {
             background: var(--surface);
-            border: 1px solid var(--surface2);
-            border-radius: var(--radius-lg);
-            padding: 28px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
             margin-bottom: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
         }
-        .section-title {
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: var(--accent);
-            margin-bottom: 16px;
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--border-light);
             font-weight: 600;
+            font-size: 0.95rem;
+            color: var(--text);
+        }
+        .section-icon {
+            font-size: 1.1rem;
+        }
+        .section-body { padding: 20px; }
+
+        /* Audio Button */
+        .speak-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background: var(--primary-light);
+            color: var(--primary);
+            border: none;
+            cursor: pointer;
+            transition: all 0.15s;
+            flex-shrink: 0;
+        }
+        .speak-btn:hover {
+            background: var(--primary);
+            color: white;
+        }
+        .speak-btn.speaking {
+            background: var(--primary);
+            color: white;
+            animation: pulse-btn 0.6s ease;
+        }
+        .speak-btn svg { width: 16px; height: 16px; }
+        @keyframes pulse-btn { 0% { transform: scale(1); } 50% { transform: scale(1.15); } 100% { transform: scale(1); } }
+
+        .speak-btn-sm {
+            width: 28px;
+            height: 28px;
+        }
+        .speak-btn-sm svg { width: 13px; height: 13px; }
+
+        /* Pronunciation Guide */
+        .pron-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .pron-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 14px;
+            background: var(--bg);
+            border-radius: 8px;
+        }
+        .pron-cyrillic {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--primary-dark);
+            min-width: 60px;
+        }
+        .pron-arrow { color: var(--text-light); }
+        .pron-sounds {
+            font-weight: 600;
+            color: var(--accent);
+        }
+        .pron-tip {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Vocab Grid */
+        .vocab-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+        .vocab-card {
+            padding: 14px;
+            background: var(--bg);
+            border-radius: 10px;
+            transition: all 0.15s;
+            cursor: pointer;
+        }
+        .vocab-card:hover { background: var(--primary-light); }
+        .vocab-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 4px;
+        }
+        .vocab-russian {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--primary-dark);
+        }
+        .vocab-pron {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            font-style: italic;
+            margin-bottom: 4px;
+        }
+        .vocab-meaning {
+            font-size: 0.85rem;
+            color: var(--text);
+            line-height: 1.4;
+        }
+        .vocab-vibe {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            line-height: 1.4;
+            margin-top: 6px;
+            display: none;
+        }
+        .vocab-card.expanded .vocab-vibe { display: block; }
+
+        /* Common Words List */
+        .common-word-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border-light);
+        }
+        .common-word-row:last-child { border-bottom: 0; }
+        .cw-russian {
+            font-weight: 600;
+            color: var(--primary-dark);
+            font-size: 1.05rem;
+            min-width: 130px;
+        }
+        .cw-pron {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            font-style: italic;
+            min-width: 110px;
+        }
+        .cw-meaning {
+            color: var(--text);
+            font-size: 0.9rem;
+            flex: 1;
         }
 
         /* Dialogue */
         .dialogue-line {
-            display: flex;
-            gap: 12px;
-            margin-bottom: 16px;
-            padding: 14px;
-            border-radius: var(--radius);
-            background: var(--surface2);
-            flex-direction: column;
+            padding: 14px 16px;
+            margin-bottom: 10px;
+            border-radius: 10px;
+            background: var(--bg);
         }
-        .dialogue-speaker {
+        .dialogue-line:last-child { margin-bottom: 0; }
+        .dl-speaker {
+            font-size: 0.75rem;
             font-weight: 700;
-            color: var(--accent);
-            font-size: 0.8rem;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
+            color: var(--primary);
+            margin-bottom: 6px;
         }
-        .dialogue-russian {
-            font-size: 1.2rem;
-            color: var(--text-bright);
+        .dl-russian-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 4px;
+        }
+        .dl-russian {
+            font-size: 1.15rem;
             font-weight: 600;
-            cursor: pointer;
+            color: var(--text);
         }
-        .dialogue-russian:hover {
-            color: var(--sun-color);
-        }
-        .dialogue-breakdown {
-            color: var(--text-dim);
-            font-size: 0.9rem;
+        .dl-breakdown {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
             line-height: 1.5;
             margin-top: 4px;
-            display: none;
         }
-        .dialogue-breakdown.visible {
-            display: block;
-        }
-        .dialogue-natural {
-            color: var(--planet3);
-            font-size: 0.85rem;
+        .dl-natural {
+            font-size: 0.88rem;
+            color: var(--accent);
             font-style: italic;
-            display: none;
-        }
-        .dialogue-natural.visible {
-            display: block;
-        }
-        .dialogue-hint {
-            text-align: center;
-            color: var(--text-dim);
-            font-size: 0.8rem;
-            margin-top: -8px;
-            margin-bottom: 16px;
-            font-style: italic;
+            margin-top: 4px;
         }
 
-        /* Grammar Nugget */
+        /* Grammar / Tips */
         .grammar-title {
-            font-size: 1.1rem;
-            color: var(--sun-color);
-            margin-bottom: 12px;
             font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 10px;
+            font-size: 1.05rem;
         }
         .grammar-text {
             color: var(--text);
             line-height: 1.8;
             font-size: 0.95rem;
         }
-
-        /* Culture Note */
+        .tip-text {
+            color: var(--text);
+            line-height: 1.8;
+            font-size: 0.95rem;
+            padding: 16px;
+            background: var(--success-light);
+            border-radius: 8px;
+            border-left: 3px solid var(--success);
+        }
         .culture-text {
             color: var(--text);
             line-height: 1.8;
             font-size: 0.95rem;
         }
 
-        /* Explore prompt */
-        .explore-prompt {
-            text-align: center;
-            color: var(--text-dim);
-            font-size: 0.9rem;
-            margin-bottom: 30px;
-            padding: 12px;
-            background: var(--surface);
-            border-radius: var(--radius);
-            border: 1px dashed var(--surface2);
-        }
-
-        /* Methodology Banner */
-        .method-banner {
-            background: linear-gradient(135deg, var(--surface), var(--surface2));
-            border: 1px solid var(--surface2);
-            border-radius: var(--radius-lg);
-            padding: 24px;
-            margin: 0 20px 30px;
-            max-width: 860px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        .method-pills {
+        /* Lesson Nav */
+        .lesson-nav {
             display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 32px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border);
         }
-        .method-pill {
+        .nav-btn {
+            flex: 1;
+            padding: 14px 20px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
             background: var(--surface);
-            border: 1px solid var(--accent);
-            border-radius: 20px;
-            padding: 6px 14px;
-            font-size: 0.78rem;
-            color: var(--accent);
-            letter-spacing: 0.5px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            font-weight: 600;
+            transition: all 0.15s;
+            text-align: center;
+            color: var(--text);
+        }
+        .nav-btn:hover { border-color: var(--primary); color: var(--primary); }
+        .nav-btn.primary {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        .nav-btn.primary:hover {
+            background: var(--primary-dark);
+            border-color: var(--primary-dark);
+        }
+        .nav-btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
         }
 
         /* Responsive */
-        @media (max-width: 600px) {
-            header h1 { font-size: 1.6rem; letter-spacing: 3px; }
-            .solar-system-visual { max-width: 320px; }
-            .sun-center { width: 90px; height: 90px; }
-            .sun-center .label { font-size: 0.8rem; }
-            .planet { width: 55px; height: 55px; }
-            .planet .label { font-size: 0.6rem; }
-            .detail-russian { font-size: 1.5rem; }
+        @media (max-width: 500px) {
+            .home-header h1 { font-size: 1.5rem; }
+            .hero-russian { font-size: 1.8rem; }
+            .vocab-grid { grid-template-columns: 1fr; }
+            .common-word-row { flex-wrap: wrap; gap: 4px; }
+            .cw-russian { min-width: unset; }
+            .cw-pron { min-width: unset; }
+            .hero-card { padding: 24px 16px; }
+            .section-body { padding: 16px; }
         }
-
-        /* Scroll hint animation */
-        @keyframes pulse { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
-        .scroll-hint { animation: pulse 2s infinite; }
     </style>
 </head>
 <body>
-    <div class="app">
-        <header>
-            <h1>Р<span>у</span>сский</h1>
-            <p>Learn Russian the way your brain actually wants to</p>
-        </header>
 
-        <div class="method-banner">
-            <div class="method-pills">
-                <span class="method-pill">ALG — Automatic Language Growth</span>
-                <span class="method-pill">Solar System Theory</span>
-                <span class="method-pill">Toddler → Fluent Progression</span>
-                <span class="method-pill">No Direct Translations</span>
-                <span class="method-pill">Casual &amp; Natural</span>
-            </div>
+<!-- Home View -->
+<div class="view active" id="homeView">
+    <div class="container">
+        <div class="home-header">
+            <h1>Learn Russian</h1>
+            <p>A simple course for learning conversational Russian</p>
         </div>
+        <div id="levelList"></div>
+        <div style="height: 40px;"></div>
+    </div>
+</div>
 
-        <button class="back-btn" id="backBtn" onclick="goBack()">
-            ← Back
-        </button>
-
-        <!-- Level Selection -->
-        <div class="view active" id="levelView">
-            <div class="level-grid" id="levelGrid"></div>
-        </div>
-
-        <!-- Lesson List -->
-        <div class="view" id="lessonListView">
-            <div class="lesson-list-header" id="lessonListHeader"></div>
-            <div id="lessonList"></div>
-        </div>
-
-        <!-- Lesson Detail -->
-        <div class="view" id="lessonView">
-            <div class="lesson-content" id="lessonContent"></div>
+<!-- Lesson View -->
+<div class="view" id="lessonView">
+    <div class="lesson-top-bar">
+        <div class="lesson-top-inner">
+            <button class="back-btn" onclick="goHome()">Back</button>
+            <div class="lesson-top-title" id="lessonTopTitle"></div>
+            <div class="lesson-top-right"></div>
         </div>
     </div>
+    <div class="container">
+        <div class="lesson-body" id="lessonBody"></div>
+    </div>
+</div>
 
-    <script>
-        let currentLevel = null;
-        let navStack = ['levelView'];
+<script>
+    // ---- State ----
+    let allLevels = [];
+    let allLessons = [];
+    let currentLevelId = null;
+    let currentLessonIndex = 0;
+    let currentLevelLessons = [];
 
-        // ---- Navigation ----
-        function showView(viewId) {
-            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
-            document.getElementById(viewId).classList.add('active');
-            document.getElementById('backBtn').classList.toggle('visible', viewId !== 'levelView');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+    // ---- Speaker icon SVG ----
+    const speakerSVG = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>`;
+
+    // ---- Text-to-Speech ----
+    let voices = [];
+    function loadVoices() {
+        voices = speechSynthesis.getVoices();
+    }
+    if (speechSynthesis.onvoiceschanged !== undefined) {
+        speechSynthesis.onvoiceschanged = loadVoices;
+    }
+    loadVoices();
+
+    function speak(text, btnEl) {
+        if (!window.speechSynthesis) return;
+        speechSynthesis.cancel();
+
+        // Clean text of parenthetical pronunciation hints
+        text = text.replace(/\(.*?\)/g, '').trim();
+
+        const u = new SpeechSynthesisUtterance(text);
+        u.lang = 'ru-RU';
+        u.rate = 0.82;
+        u.pitch = 1;
+
+        const ruVoice = voices.find(v => v.lang && v.lang.startsWith('ru'));
+        if (ruVoice) u.voice = ruVoice;
+
+        if (btnEl) {
+            btnEl.classList.add('speaking');
+            u.onend = () => btnEl.classList.remove('speaking');
+            u.onerror = () => btnEl.classList.remove('speaking');
         }
 
-        function goBack() {
-            if (navStack.length > 1) {
-                navStack.pop();
-                showView(navStack[navStack.length - 1]);
-            }
-        }
+        speechSynthesis.speak(u);
+    }
 
-        function navigateTo(viewId) {
-            navStack.push(viewId);
-            showView(viewId);
-        }
+    function speakBtn(text, size) {
+        const cls = size === 'sm' ? 'speak-btn speak-btn-sm' : 'speak-btn';
+        return `<button class="${cls}" onclick="event.stopPropagation(); speak('${esc(text)}', this)" title="Listen">${speakerSVG}</button>`;
+    }
 
-        // ---- Load Levels ----
-        async function loadLevels() {
-            const res = await fetch('/api/levels');
-            const levels = await res.json();
-            const grid = document.getElementById('levelGrid');
-            grid.innerHTML = levels.map(l => `
-                <div class="level-card" onclick="openLevel('${l.id}', '${l.name}', '${l.description}')">
-                    <div class="level-icon">${l.icon}</div>
-                    <div class="level-info">
-                        <h3>${l.name}</h3>
-                        <p>${l.description}</p>
+    function esc(str) {
+        return str.replace(/'/g, "\\'").replace(/"/g, '&quot;');
+    }
+
+    // ---- Navigation ----
+    function showView(id) {
+        document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+        document.getElementById(id).classList.add('active');
+        window.scrollTo({ top: 0 });
+    }
+
+    function goHome() {
+        showView('homeView');
+    }
+
+    // ---- Toggle Level ----
+    function toggleLevel(levelId) {
+        const header = document.getElementById('lh-' + levelId);
+        const body = document.getElementById('lb-' + levelId);
+        const isOpen = header.classList.contains('open');
+
+        // Close all
+        document.querySelectorAll('.level-header').forEach(h => h.classList.remove('open'));
+        document.querySelectorAll('.level-lessons').forEach(b => b.classList.remove('open'));
+
+        if (!isOpen) {
+            header.classList.add('open');
+            body.classList.add('open');
+        }
+    }
+
+    // ---- Toggle Vocab Detail ----
+    function toggleVocab(el) {
+        el.classList.toggle('expanded');
+    }
+
+    // ---- Load Data ----
+    async function init() {
+        const [levelsRes, lessonsData] = await Promise.all([
+            fetch('/api/levels').then(r => r.json()),
+            Promise.all([
+                fetch('/api/lessons/babysteps').then(r => r.json()),
+                fetch('/api/lessons/first_words').then(r => r.json()),
+                fetch('/api/lessons/little_sentences').then(r => r.json()),
+                fetch('/api/lessons/street_talk').then(r => r.json()),
+                fetch('/api/lessons/storyteller').then(r => r.json())
+            ])
+        ]);
+
+        allLevels = levelsRes;
+        allLessons = lessonsData.flat();
+        renderHome();
+    }
+
+    // ---- Render Home ----
+    function renderHome() {
+        const el = document.getElementById('levelList');
+        el.innerHTML = allLevels.map(level => {
+            const lessons = allLessons.filter(l => l.level === level.id).sort((a,b) => a.order - b.order);
+            return `
+                <div class="level-section">
+                    <div class="level-header" id="lh-${level.id}" onclick="toggleLevel('${level.id}')">
+                        <span class="level-icon">${level.icon}</span>
+                        <div style="flex:1">
+                            <div class="level-title">${level.name}</div>
+                            <div class="level-desc">${level.description}</div>
+                        </div>
+                        <span class="level-chevron">&#9656;</span>
+                    </div>
+                    <div class="level-lessons" id="lb-${level.id}">
+                        ${lessons.length === 0 ? '<div style="padding:20px;color:var(--text-secondary)">Coming soon!</div>' : lessons.map(l => `
+                            <div class="lesson-card" onclick="openLesson('${level.id}', ${l.order})">
+                                <div class="lesson-num">${l.order}</div>
+                                <div class="lesson-card-info">
+                                    <div class="lesson-card-title">${l.title || l.sun.russian}</div>
+                                    <div class="lesson-card-sub">${l.sun.russian} &mdash; ${l.sun.casual_pronunciation}</div>
+                                </div>
+                                <span class="lesson-card-arrow">&#8250;</span>
+                            </div>
+                        `).join('')}
                     </div>
                 </div>
-            `).join('');
-        }
-
-        // ---- Open Level ----
-        async function openLevel(levelId, name, description) {
-            currentLevel = levelId;
-            const res = await fetch(`/api/lessons/${levelId}`);
-            const lessons = await res.json();
-
-            document.getElementById('lessonListHeader').innerHTML = `
-                <h2>${name}</h2>
-                <p>${description}</p>
             `;
+        }).join('');
+    }
 
-            const list = document.getElementById('lessonList');
-            if (lessons.length === 0) {
-                list.innerHTML = `<div class="section-card"><p style="color:var(--text-dim)">More lessons coming soon! Keep practicing what you've learned.</p></div>`;
-            } else {
-                list.innerHTML = lessons.map(l => `
-                    <div class="lesson-item" onclick="openLesson('${levelId}', ${l.order})">
-                        <div>
-                            <div class="sun-word">${l.sun.russian}</div>
-                            <div class="sun-pron">${l.sun.casual_pronunciation}</div>
-                        </div>
-                        <div class="arrow">→</div>
-                    </div>
-                `).join('');
-            }
+    // ---- Open Lesson ----
+    function openLesson(levelId, order) {
+        currentLevelId = levelId;
+        currentLevelLessons = allLessons.filter(l => l.level === levelId).sort((a,b) => a.order - b.order);
+        currentLessonIndex = currentLevelLessons.findIndex(l => l.order === order);
+        renderLesson();
+        showView('lessonView');
+    }
 
-            navigateTo('lessonListView');
+    function prevLesson() {
+        if (currentLessonIndex > 0) {
+            currentLessonIndex--;
+            renderLesson();
+            window.scrollTo({ top: 0 });
         }
+    }
 
-        // ---- Open Lesson ----
-        async function openLesson(levelId, order) {
-            const res = await fetch(`/api/lesson/${levelId}/${order}`);
-            const lesson = await res.json();
-            renderLesson(lesson);
-            navigateTo('lessonView');
+    function nextLesson() {
+        if (currentLessonIndex < currentLevelLessons.length - 1) {
+            currentLessonIndex++;
+            renderLesson();
+            window.scrollTo({ top: 0 });
         }
+    }
 
-        // ---- Render Lesson ----
-        function renderLesson(lesson) {
-            const c = document.getElementById('lessonContent');
-            const planets = lesson.planets;
+    // ---- Render Lesson ----
+    function renderLesson() {
+        const lesson = currentLevelLessons[currentLessonIndex];
+        const level = allLevels.find(l => l.id === currentLevelId);
 
-            // Truncate labels for solar system visual
-            function shortLabel(text) {
-                return text.length > 12 ? text.substring(0, 10) + '…' : text;
-            }
+        document.getElementById('lessonTopTitle').textContent =
+            `${level.name} — Lesson ${lesson.order}`;
 
-            c.innerHTML = `
-                <!-- Solar System Visual -->
-                <div class="solar-system-visual">
-                    <div class="orbit orbit-1"></div>
-                    <div class="orbit orbit-2"></div>
-                    <div class="orbit orbit-3"></div>
-                    <div class="sun-center" onclick="showDetail('sun')">
-                        <span class="label">${shortLabel(lesson.sun.russian)}</span>
+        const body = document.getElementById('lessonBody');
+        body.innerHTML = `
+            ${renderHero(lesson)}
+            ${renderPronunciation(lesson)}
+            ${renderVocab(lesson)}
+            ${renderCommonWords(lesson)}
+            ${renderDialogue(lesson)}
+            ${renderGrammar(lesson)}
+            ${renderMemTip(lesson)}
+            ${renderCulture(lesson)}
+            ${renderNav()}
+        `;
+    }
+
+    function renderHero(lesson) {
+        return `
+            <div class="hero-card">
+                <div class="hero-russian">
+                    ${lesson.sun.russian}
+                    ${speakBtn(lesson.sun.russian, '')}
+                </div>
+                <div class="hero-pron">${lesson.sun.casual_pronunciation}</div>
+                <div class="hero-vibe">${lesson.sun.vibe}</div>
+            </div>
+        `;
+    }
+
+    function renderPronunciation(lesson) {
+        const guide = lesson.pronunciation_guide;
+        if (!guide || !guide.length) return '';
+        return `
+            <div class="section">
+                <div class="section-header">
+                    <span class="section-icon">&#127908;</span>
+                    How to Pronounce
+                </div>
+                <div class="section-body">
+                    <div class="pron-grid">
+                        ${guide.map(p => `
+                            <div class="pron-row">
+                                <span class="pron-cyrillic">${p.part}</span>
+                                <span class="pron-arrow">&#8594;</span>
+                                <div>
+                                    <div class="pron-sounds">"${p.sounds_like}"</div>
+                                    <div class="pron-tip">${p.tip}</div>
+                                </div>
+                            </div>
+                        `).join('')}
                     </div>
-                    ${planets.map((p, i) => `
-                        <div class="planet planet-${i}" onclick="showDetail('planet', ${i})">
-                            <span class="label">${shortLabel(p.russian)}</span>
+                </div>
+            </div>
+        `;
+    }
+
+    function renderVocab(lesson) {
+        const planets = lesson.planets;
+        if (!planets || !planets.length) return '';
+        return `
+            <div class="section">
+                <div class="section-header">
+                    <span class="section-icon">&#128218;</span>
+                    Key Words
+                </div>
+                <div class="section-body">
+                    <div class="vocab-grid">
+                        ${planets.map(p => `
+                            <div class="vocab-card" onclick="toggleVocab(this)">
+                                <div class="vocab-top">
+                                    <span class="vocab-russian">${p.russian}</span>
+                                    ${speakBtn(p.russian, 'sm')}
+                                </div>
+                                <div class="vocab-pron">${p.casual_pronunciation}</div>
+                                <div class="vocab-meaning">${p.meaning || ''}</div>
+                                <div class="vocab-vibe">${p.vibe}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                    <div style="text-align:center;margin-top:12px;font-size:0.8rem;color:var(--text-light)">Tap a word to see more details</div>
+                </div>
+            </div>
+        `;
+    }
+
+    function renderCommonWords(lesson) {
+        const words = lesson.common_words;
+        if (!words || !words.length) return '';
+        return `
+            <div class="section">
+                <div class="section-header">
+                    <span class="section-icon">&#128172;</span>
+                    More Common Words
+                </div>
+                <div class="section-body">
+                    ${words.map(w => `
+                        <div class="common-word-row">
+                            ${speakBtn(w.russian, 'sm')}
+                            <span class="cw-russian">${w.russian}</span>
+                            <span class="cw-pron">${w.pronunciation}</span>
+                            <span class="cw-meaning">${w.meaning}</span>
                         </div>
                     `).join('')}
                 </div>
+            </div>
+        `;
+    }
 
-                <div class="explore-prompt scroll-hint">
-                    ☝ Click the sun or any planet to explore its meaning
+    function renderDialogue(lesson) {
+        const d = lesson.mini_dialogue;
+        if (!d || !d.lines) return '';
+        return `
+            <div class="section">
+                <div class="section-header">
+                    <span class="section-icon">&#128483;</span>
+                    Conversation
                 </div>
-
-                <!-- Detail Panel (hidden until click) -->
-                <div id="detailPanel" style="display:none;"></div>
-
-                <!-- Mini Dialogue -->
-                <div class="section-card">
-                    <div class="section-title">Mini Conversation</div>
-                    <div class="dialogue-hint">Click any Russian text to reveal the breakdown</div>
-                    ${lesson.mini_dialogue.lines.map((line, i) => `
+                <div class="section-body">
+                    ${d.lines.map(line => `
                         <div class="dialogue-line">
-                            <div class="dialogue-speaker">Person ${line.speaker}</div>
-                            <div class="dialogue-russian" onclick="toggleBreakdown(${i})">
-                                ${line.russian}
+                            <div class="dl-speaker">Person ${line.speaker}</div>
+                            <div class="dl-russian-row">
+                                <span class="dl-russian">${line.russian}</span>
+                                ${speakBtn(line.russian, 'sm')}
                             </div>
-                            <div class="dialogue-breakdown" id="breakdown-${i}">
-                                ${line.breakdown}
-                            </div>
-                            <div class="dialogue-natural" id="natural-${i}">
-                                ≈ "${line.natural}"
-                            </div>
+                            <div class="dl-breakdown">${line.breakdown}</div>
+                            <div class="dl-natural">${line.natural}</div>
                         </div>
                     `).join('')}
+                    <div style="margin-top:14px; text-align:center;">
+                        <button class="speak-btn" style="width:auto;border-radius:8px;padding:8px 18px;gap:8px;display:inline-flex;font-size:0.85rem;font-weight:600" onclick="speakFullDialogue(this)">
+                            ${speakerSVG}
+                            <span>Play Full Conversation</span>
+                        </button>
+                    </div>
                 </div>
+            </div>
+        `;
+    }
 
-                <!-- Grammar Nugget -->
-                <div class="section-card">
-                    <div class="section-title">Grammar Nugget</div>
-                    <div class="grammar-title">${lesson.grammar_nugget.title}</div>
-                    <div class="grammar-text">${lesson.grammar_nugget.explanation}</div>
+    function speakFullDialogue(btn) {
+        const lesson = currentLevelLessons[currentLessonIndex];
+        if (!lesson.mini_dialogue) return;
+        speechSynthesis.cancel();
+        btn.classList.add('speaking');
+
+        const lines = lesson.mini_dialogue.lines;
+        let i = 0;
+
+        function speakNext() {
+            if (i >= lines.length) {
+                btn.classList.remove('speaking');
+                return;
+            }
+            const u = new SpeechSynthesisUtterance(lines[i].russian);
+            u.lang = 'ru-RU';
+            u.rate = 0.82;
+            const ruVoice = voices.find(v => v.lang && v.lang.startsWith('ru'));
+            if (ruVoice) u.voice = ruVoice;
+            u.onend = () => { i++; setTimeout(speakNext, 500); };
+            u.onerror = () => { i++; speakNext(); };
+            speechSynthesis.speak(u);
+        }
+        speakNext();
+    }
+
+    function renderGrammar(lesson) {
+        const g = lesson.grammar_nugget;
+        if (!g) return '';
+        return `
+            <div class="section">
+                <div class="section-header">
+                    <span class="section-icon">&#129513;</span>
+                    Putting It Together
                 </div>
+                <div class="section-body">
+                    <div class="grammar-title">${g.title}</div>
+                    <div class="grammar-text">${g.explanation}</div>
+                </div>
+            </div>
+        `;
+    }
 
-                <!-- Culture Note -->
-                <div class="section-card">
-                    <div class="section-title">Culture Note</div>
+    function renderMemTip(lesson) {
+        const tip = lesson.memorization_tip;
+        if (!tip) return '';
+        return `
+            <div class="section">
+                <div class="section-header">
+                    <span class="section-icon">&#128161;</span>
+                    Memory Trick
+                </div>
+                <div class="section-body">
+                    <div class="tip-text">${tip}</div>
+                </div>
+            </div>
+        `;
+    }
+
+    function renderCulture(lesson) {
+        if (!lesson.culture_note) return '';
+        return `
+            <div class="section">
+                <div class="section-header">
+                    <span class="section-icon">&#127760;</span>
+                    Culture Corner
+                </div>
+                <div class="section-body">
                     <div class="culture-text">${lesson.culture_note}</div>
                 </div>
-            `;
+            </div>
+        `;
+    }
 
-            // Store lesson data for detail panel access
-            window._currentLesson = lesson;
-        }
+    function renderNav() {
+        const hasPrev = currentLessonIndex > 0;
+        const hasNext = currentLessonIndex < currentLevelLessons.length - 1;
+        const nextLesson = hasNext ? currentLevelLessons[currentLessonIndex + 1] : null;
+        return `
+            <div class="lesson-nav">
+                <button class="nav-btn" onclick="prevLesson()" ${hasPrev ? '' : 'disabled'}>
+                    &#8249; Previous
+                </button>
+                <button class="nav-btn primary" onclick="nextLesson()" ${hasNext ? '' : 'disabled'}>
+                    ${hasNext ? 'Next: ' + (nextLesson.title || nextLesson.sun.russian) + ' &#8250;' : 'Course Complete!'}
+                </button>
+            </div>
+        `;
+    }
 
-        // ---- Show Detail Panel ----
-        function showDetail(type, index) {
-            const lesson = window._currentLesson;
-            const panel = document.getElementById('detailPanel');
-            let data, colorClass, textClass;
-
-            if (type === 'sun') {
-                data = lesson.sun;
-                colorClass = 'sun-detail';
-                textClass = 'sun-text';
-            } else {
-                data = lesson.planets[index];
-                colorClass = `planet-detail-${index}`;
-                textClass = `planet-text-${index}`;
-            }
-
-            panel.style.display = 'block';
-            panel.className = `detail-panel ${colorClass}`;
-            panel.innerHTML = `
-                <div class="detail-russian ${textClass}">${data.russian}</div>
-                <div class="detail-pronunciation">${data.casual_pronunciation}</div>
-                <div class="detail-vibe">${data.vibe}</div>
-            `;
-
-            panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-        }
-
-        // ---- Toggle Dialogue Breakdown ----
-        function toggleBreakdown(index) {
-            const bd = document.getElementById(`breakdown-${index}`);
-            const nat = document.getElementById(`natural-${index}`);
-            bd.classList.toggle('visible');
-            nat.classList.toggle('visible');
-        }
-
-        // ---- Init ----
-        loadLevels();
-    </script>
+    // ---- Init ----
+    init();
+</script>
 </body>
 </html>
